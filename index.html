@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
+    <title>Digital Visiting Card</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,21 +17,30 @@
         .card {
             border: 1px solid #ccc;
             padding: 20px;
-            margin-top: 20px;
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>QR Code Generator</h1>
-    <input type="text" id="name" placeholder="Enter your name">
-    <input type="text" id="email" placeholder="Enter your email">
-    <button onclick="generateQRCode()">Generate QR Code</button>
-    <div id="qrcode"></div>
     <div class="card" id="card"></div>
 
-    <!-- Include qrcode.min.js from a CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        function getQueryParams() {
+            var params = {};
+            var queryString = window.location.search.substring(1);
+            var queryArray = queryString.split('&');
+            queryArray.forEach(function(param) {
+                var pair = param.split('=');
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            });
+            return params;
+        }
+
+        window.onload = function() {
+            var params = getQueryParams();
+            var cardContent = `Name: ${params.name}<br>Email: ${params.email}`;
+            document.getElementById('card').innerHTML = cardContent;
+        }
+    </script>
 </body>
 </html>
