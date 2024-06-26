@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Visiting Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card"></div>
+
+    <script>
+        function getQueryParams() {
+            var params = {};
+            var queryString = window.location.search.substring(1);
+            var queryArray = queryString.split('&');
+            queryArray.forEach(function(param) {
+                var pair = param.split('=');
+                params[pair[0]] = decodeURIComponent(pair[1]);
+            });
+            return params;
+        }
+
+        window.onload = function() {
+            var params = getQueryParams();
+            var cardContent = `Name: ${params.name}<br>Email: ${params.email}`;
+            document.getElementById('card').innerHTML = cardContent;
+        }
+    </script>
+</body>
+</html>
