@@ -8,7 +8,7 @@ function generateQRCode() {
     }
 
     // Update this URL to your Netlify site URL
-    var qrCodeData = `https://merry-tartufo-fd5d9e.netlify.app/`;
+    var qrCodeData = `https://merry-tartufo-fd5d9e.netlify.app/card.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
 
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: qrCodeData,
